@@ -51,6 +51,8 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#fbbf24" />
+        {/* Google AdSense Verification */}
+        <meta name="google-adsense-account" content="ca-pub-9991254411797769" />
         {/* Search Engine Verification Meta Tags */}
         <meta name="google-site-verification" content="rBJ4ZSJAJ3zK0X-f23myFlgWWdmQKcddv82oiO2mPZw" />
         <meta name="naver-site-verification" content="b86c4d1857b9de2062c072fb9876140ca5c5ea11" />
