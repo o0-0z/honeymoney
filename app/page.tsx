@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { InputForm } from "@/components/InputForm";
 import { ResultCard } from "@/components/ResultCard";
-import { AdBanner, AdInContent } from "@/components/AdComponents";
+import { AdBanner, AdInContent, AdBottom, AdMiddle, AdEmpty } from "@/components/AdComponents";
 import { calculateUnemploymentBenefit, UnemploymentBenefitInput, UnemploymentBenefitResult } from "@/utils/calc";
 
 export default function Home() {
@@ -40,13 +40,14 @@ export default function Home() {
         </div>
 
         {/* 광고 상단 */}
-        <AdBanner />
+        {!result && <AdBanner />}
 
         {/* 메인 컨텐츠 */}
         {result ? (
           <>
+            <AdBottom />
             <ResultCard result={result} onReset={handleReset} />
-            <AdInContent />
+            <AdMiddle />
           </>
         ) : (
           <InputForm onSubmit={handleCalculate} />
@@ -91,7 +92,7 @@ export default function Home() {
           </div>
 
           {/* 추가 광고 */}
-          <AdInContent />
+          {!result ? <AdInContent /> : <AdEmpty />}
 
           {/* 고용센터 정보 */}
           <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-lg shadow-md p-6 md:p-8 text-center">

@@ -131,7 +131,7 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
 
       {/* 버튼 영역 */}
       <div className="space-y-3">
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {/* 카카오톡 공유 */}
           <button
             onClick={handleKakaoShare}
