@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { InputForm } from "@/components/InputForm";
 import { ResultCard } from "@/components/ResultCard";
-import { AdBanner, AdInContent } from "@/components/AdComponents";
+import { AdBanner, AdInContent, AdBottom } from "@/components/AdComponents";
 import { calculateUnemploymentBenefit, UnemploymentBenefitInput, UnemploymentBenefitResult } from "@/utils/calc";
 
 export default function Home() {
@@ -108,6 +108,9 @@ export default function Home() {
               </p>
             </div>
           </div>
+
+          {/* 하단 광고 */}
+          <AdBottom />
         </div>
 
         {/* 푸터 */}
