@@ -84,23 +84,6 @@ npm start
 4. **자동 배포**
    - main 브랜치에 push하면 자동 배포됨
 
-## Google AdSense 설정
-
-### AdSense ID 교체
-
-1. `app/layout.tsx` 파일에서:
-   ```typescript
-   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
-   ```
-   `ca-pub-xxxxxxxxxxxxxxxx`를 본인의 AdSense Publisher ID로 교체
-
-2. `components/AdComponents.tsx` 파일에서:
-   ```typescript
-   data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
-   data-ad-slot="1234567890"
-   ```
-   실제 Ad Slot ID로 교체
-
 ## 계산 로직 상세
 
 ### 2026년 기준 실업급여 규정
