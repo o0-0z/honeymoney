@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://honeymoney.netlify.app/sitemap.xml
+Sitemap: https://honeymoney-beta.vercel.app/sitemap.xml
 
-# Google Search Console
-# Please add your domain verification here if needed
+# DaumWebMasterTool
+#DaumWebMasterTool:bc97ca638b80671d0cd9e2468cc16ba2e9ca8dd7178614b2e9cc0a26b044195b:59ns42XfloqnbPOn+FHuCA==

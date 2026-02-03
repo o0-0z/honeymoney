@@ -4,7 +4,7 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://honeymoney.netlify.app",
+      url: "https://honeymoney-beta.vercel.app",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
