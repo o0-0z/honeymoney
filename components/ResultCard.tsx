@@ -95,7 +95,7 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
           <button
             onClick={onReset}
             className="bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
-          >ㄴ
+          >
             🔄 다시 계산
           </button>
         </div>
