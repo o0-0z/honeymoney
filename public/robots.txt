@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://honeymoney.netlify.app/sitemap.xml
+
+# Google Search Console
+# Please add your domain verification here if needed

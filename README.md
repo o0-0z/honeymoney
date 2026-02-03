@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HoneyMoney (시럽급여) - 2026년 실업급여 계산기
 
-## Getting Started
+## 프로젝트 소개
 
-First, run the development server:
+**시럽급여 (HoneyMoney)**는 2026년 기준 실업급여를 간편하게 계산해주는 웹 애플리케이션입니다.
+
+- **캐치프레이즈**: 달달하게 계산되는 실업급여
+- **테마**: 노란 꿀벌 + 따뜻한 UI
+- **최적화**: 모바일 최우선 (반응형 디자인)
+
+## 기술 스택
+
+- **프레임워크**: Next.js 15+ (App Router)
+- **스타일링**: Tailwind CSS
+- **언어**: TypeScript
+- **배포**: Netlify
+
+## 주요 기능
+
+### 1. 실업급여 계산
+- **입력**: 세전 월급, 나이, 고용보험 가입기간, 퇴사 사유
+- **계산 로직**:
+  - 평균임금 = 월급 ÷ 30
+  - 1일 실업급여 = 평균임금 × 60%
+  - 상한액: 76,000원 / 하한액: 51,750원
+  - 연령 + 가입기간에 따른 지급일수 자동 계산
+
+### 2. 반응형 UI
+- 모바일, 태블릿, 데스크톱 모두 최적화
+- Tailwind CSS로 스타일링
+- 직관적인 입력 폼 및 결과 카드
+
+### 3. Google AdSense 통합
+- 페이지 상단, 중간, 하단 광고 배치
+- Placeholder로 설정되어 있으며, 실제 Publisher ID로 교체 가능
+
+### 4. SEO 최적화
+- 메타 태그 설정
+- robots.txt 및 sitemap.xml 자동 생성
+- Open Graph 태그 포함
+
+### 5. PWA 지원
+- manifest.json으로 설정
+- 설치 가능한 웹 앱 지원
+
+## 설치 및 실행
+
+### 개발 환경 실행
 
 ```bash
+# 1. 의존성 설치 (이미 완료됨)
+npm install
+
+# 2. 개발 서버 실행
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 프로덕션 빌드
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# 빌드
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 실행
+npm start
+```
 
-## Learn More
+## Netlify 배포
 
-To learn more about Next.js, take a look at the following resources:
+### 배포 방법
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **GitHub 레포지토리 연결**
+   - GitHub에 프로젝트 업로드
+   - Netlify와 GitHub 연결
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **빌드 설정**
+   - Build command: `npm run build`
+   - Publish directory: `.next`
 
-## Deploy on Vercel
+3. **환경 변수 설정**
+   - `NEXT_PUBLIC_SITE_URL`: 배포 도메인
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **자동 배포**
+   - main 브랜치에 push하면 자동 배포됨
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Google AdSense 설정
+
+### AdSense ID 교체
+
+1. `app/layout.tsx` 파일에서:
+   ```typescript
+   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+   ```
+   `ca-pub-xxxxxxxxxxxxxxxx`를 본인의 AdSense Publisher ID로 교체
+
+2. `components/AdComponents.tsx` 파일에서:
+   ```typescript
+   data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+   data-ad-slot="1234567890"
+   ```
+   실제 Ad Slot ID로 교체
+
+## 계산 로직 상세
+
+### 2026년 기준 실업급여 규정
+
+#### 기본 계산식
+```
+평균임금 = 세전 월급 ÷ 30일
+1일 실업급여 = 평균임금 × 60%
+(상한액: 76,000원, 하한액: 51,750원)
+```
+
+#### 지급일수 (비자발적 퇴사 기준)
+
+| 연령 | 1년 미만 | 1~3년 | 3~5년 | 5~10년 | 10년 이상 |
+|------|---------|-------|-------|--------|----------|
+| 30세 미만 | 90일 | 120일 | 150일 | 180일 | 210일 |
+| 30~50세 | 90일 | 150일 | 180일 | 210일 | 240일 |
+| 50세 이상 | 90일 | 150일 | 210일 | 240일 | 300일 |
+
+**자발적 퇴사**: 최대 120일
+
+#### 조건
+- **12개월 이상 가입 필수**: 미만일 경우 급여 대상 아님
+- **비자발적 퇴사**: 권고사직, 회사 폐업 등
+- **자발적 퇴사**: 개인 사정으로 인한 퇴사
+
+## 주의사항
+
+⚠️ **이 계산기는 일반적인 계산입니다.**
+- 개인의 상황에 따라 실제 지급액이 다를 수 있습니다.
+- **정확한 금액은 관할 고용센터**에 문의하세요.
+
+### 관련 기관
+
+- **고용보험 콜센터**: 1577-0100
+- **고용센터 찾기**: https://www.work.go.kr
+- **고용보험 홈페이지**: https://www.ei.go.kr
+
+---
+
+**마지막 업데이트**: 2026년 2월 3일
