@@ -2,12 +2,43 @@
 
 import { UnemploymentBenefitResult, formatCurrency } from "@/utils/calc";
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 interface ResultCardProps {
   result: UnemploymentBenefitResult;
   onReset: () => void;
 }
 
 export function ResultCard({ result, onReset }: ResultCardProps) {
+  const handleKakaoShare = () => {
+    const text = `🍯 시럽급여 계산 결과\n\n일일 실업급여: ${formatCurrency(result.dailyBenefit)}\n총 지급일수: ${result.totalDays}일\n총 예상액: ${formatCurrency(result.totalAmount)}\n\nhttps://honeymoney.vercel.app`;
+    
+    if (window.Kakao) {
+      window.Kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "시럽급여 계산기",
+          description: text,
+          imageUrl: "https://honeymoney.vercel.app/og-image.png",
+          link: {
+            mobileWebUrl: "https://honeymoney.vercel.app",
+            webUrl: "https://honeymoney.vercel.app",
+          },
+        },
+      });
+    }
+  };
+
+  const handleCopyLink = () => {
+    const url = `https://honeymoney.vercel.app?daily=${result.dailyBenefit}&days=${result.totalDays}&total=${result.totalAmount}`;
+    navigator.clipboard.writeText(url).then(() => {
+      alert("링크가 복사되었습니다!");
+    });
+  };
   return (
     <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg shadow-lg p-8 space-y-6">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
@@ -75,12 +106,33 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
       </div>
 
       {/* 버튼 영역 */}
-      <button
-        onClick={onReset}
-        className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-4 px-6 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
-      >
-        🔄 다시 계산하기
-      </button>
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {/* 카카오톡 공유 */}
+          <button
+            onClick={handleKakaoShare}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+          >
+            💬 카톡 공유
+          </button>
+
+          {/* URL 복사 공유 */}
+          <button
+            onClick={handleCopyLink}
+            className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+          >
+            🔗 링크 복사
+          </button>
+
+          {/* 다시 계산하기 */}
+          <button
+            onClick={onReset}
+            className="bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+          >
+            🔄 다시 계산
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
