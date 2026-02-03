@@ -38,7 +38,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg shadow-lg p-8 text-center">
       {/* 월급 입력 */}
       <div className="text-center">
-        <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
+        <label className="block text-lg font-semibold text-black mb-2 text-center">
           세전 월급
         </label>
         <div className="relative w-full">
@@ -49,7 +49,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             min="1000000"
             step="100000"
-            className="w-full px-4 py-3 pr-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
+            className="w-full px-4 py-3 pr-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center" text-black
             placeholder="0"
           />
           <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 font-medium">원</span>
@@ -58,7 +58,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
 
       {/* 나이 입력 */}
       <div className="text-center">
-        <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
+        <label className="block text-lg font-semibold text-black mb-2 text-center"> 
           나이
         </label>
         <input
@@ -68,15 +68,15 @@ export function InputForm({ onSubmit }: InputFormProps) {
           onChange={handleChange}
           min="18"
           max="100"
-          className="w-full px-4 pr-3 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
-          placeholder="35"
+          className="w-full px-4 pr-3 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center" text-black
+          placeholder="0"
         />
       </div>
 
       {/* 고용보험 가입기간 */}
       <div className="grid grid-cols-2 gap-4 text-center">
         <div className="text-center">
-          <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
+          <label className="block text-lg font-semibold text-black mb-2 text-center">
             가입기간 (년)
           </label>
           <input
@@ -86,8 +86,8 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             min="0"
             max="50"
-            className="w-full px-4 pr-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
-            placeholder="5"
+            className="w-full px-4 pr-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center" text-black
+            placeholder="0"
           />
         </div>
         <div className="text-center">
@@ -101,7 +101,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             min="0"
             max="11"
-            className="w-full px-4 pr-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
+            className="w-full px-4 pr-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center" text-black
             placeholder="0"
           />
         </div>
