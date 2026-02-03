@@ -9,9 +9,9 @@ interface InputFormProps {
 
 export function InputForm({ onSubmit }: InputFormProps) {
   const [formData, setFormData] = useState({
-    monthlySalary: 3000000,
-    age: 35,
-    serviceYears: 5,
+    monthlySalary: 0,
+    age: 0,
+    serviceYears: 0,
     serviceMonths: 0,
     isInvoluntary: true,
   });
@@ -35,13 +35,13 @@ export function InputForm({ onSubmit }: InputFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg shadow-lg p-8">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg shadow-lg p-8 text-center">
       {/* 월급 입력 */}
-      <div>
-        <label className="block text-lg font-semibold text-gray-800 mb-2">
+      <div className="text-center">
+        <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
           세전 월급
         </label>
-        <div className="flex items-center gap-2">
+        <div className="relative w-full">
           <input
             type="number"
             name="monthlySalary"
@@ -49,16 +49,16 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             min="1000000"
             step="100000"
-            className="flex-1 px-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg"
-            placeholder="3000000"
+            className="w-full px-4 py-3 pr-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
+            placeholder="0"
           />
-          <span className="text-gray-600 font-medium">원</span>
+          <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 font-medium">원</span>
         </div>
       </div>
 
       {/* 나이 입력 */}
-      <div>
-        <label className="block text-lg font-semibold text-gray-800 mb-2">
+      <div className="text-center">
+        <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
           나이
         </label>
         <input
@@ -68,15 +68,15 @@ export function InputForm({ onSubmit }: InputFormProps) {
           onChange={handleChange}
           min="18"
           max="100"
-          className="w-full px-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg"
+          className="w-full px-4 pr-3 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
           placeholder="35"
         />
       </div>
 
       {/* 고용보험 가입기간 */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
+      <div className="grid grid-cols-2 gap-4 text-center">
+        <div className="text-center">
+          <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
             가입기간 (년)
           </label>
           <input
@@ -86,12 +86,12 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             min="0"
             max="50"
-            className="w-full px-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg"
+            className="w-full px-4 pr-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
             placeholder="5"
           />
         </div>
-        <div>
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
+        <div className="text-center">
+          <label className="block text-lg font-semibold text-gray-800 mb-2 text-center">
             가입기간 (개월)
           </label>
           <input
@@ -101,15 +101,15 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             min="0"
             max="11"
-            className="w-full px-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg"
+            className="w-full px-4 pr-4 py-3 border-2 border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-lg text-center"
             placeholder="0"
           />
         </div>
       </div>
 
       {/* 퇴사 사유 */}
-      <div className="bg-yellow-50 p-4 rounded-lg">
-        <label className="flex items-center gap-3 cursor-pointer">
+      <div className="bg-yellow-50 p-4 rounded-lg text-center">
+        <label className="flex items-center justify-center gap-3 cursor-pointer">
           <input
             type="checkbox"
             name="isInvoluntary"
@@ -117,11 +117,11 @@ export function InputForm({ onSubmit }: InputFormProps) {
             onChange={handleChange}
             className="w-5 h-5 accent-yellow-500 cursor-pointer"
           />
-          <span className="text-lg font-semibold text-gray-800">
-            비자발적 퇴사 (권고사직, 회사 폐업 등)
+          <span className="text-lg font-semibold text-gray-800 text-center">
+            비자발적 퇴사 <br />(권고사직, 회사 폐업 등)
           </span>
         </label>
-        <p className="text-sm text-gray-600 mt-2 ml-8">
+        <p className="text-sm text-red-600 font-semibold mt-2 text-center">
           체크하지 않으면 자발적 퇴사로 간주됩니다.
         </p>
       </div>

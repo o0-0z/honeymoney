@@ -107,13 +107,13 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
             <span className="font-semibold">1단계:</span> 평균임금 계산 (월급 ÷ 30)
           </p>
           <p className="text-sm">
-            <span className="font-semibold">2단계:</span> 1일 실업급여 계산 (평균임금 × 60%)
+            <span className="font-semibold">2단계:</span> 1일 실업급여 계산 <br />(평균임금 × 60%)
           </p>
           <p className="text-sm">
-            <span className="font-semibold">3단계:</span> 상한액/하한액 적용 (최대 76,000원 / 최소 51,750원)
+            <span className="font-semibold">3단계:</span> 상한액/하한액 적용 <br />(최대 76,000원 / 최소 51,750원)
           </p>
           <p className="text-sm">
-            <span className="font-semibold">4단계:</span> 연령 + 가입기간에 따른 지급일수 결정
+            <span className="font-semibold">4단계:</span> 연령 + 가입기간에 따라<br /> 지급일수 결정
           </p>
           <p className="text-sm">
             <span className="font-semibold">5단계:</span> 총 지급액 = 1일 급여 × 지급일수
@@ -124,7 +124,7 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
       {/* 주의사항 */}
       <div className="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-500">
         <p className="text-sm text-gray-700">
-          <span className="font-bold">📋 주의:</span> 이 계산기는 2026년 기준 일반적인 계산입니다.
+          <span className="font-bold">📋 주의:</span> 이 계산기는 2026년 기준 <br />일반적인 계산입니다.
           정확한 실업급여는 관할 고용센터에 문의하시기 바랍니다.
         </p>
       </div>
