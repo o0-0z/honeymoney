@@ -1,6 +1,7 @@
 "use client";
 
 import { UnemploymentBenefitResult, formatCurrency } from "@/utils/calc";
+import { useEffect } from "react";
 
 interface ResultCardProps {
   result: UnemploymentBenefitResult;
@@ -8,6 +9,60 @@ interface ResultCardProps {
 }
 
 export function ResultCard({ result, onReset }: ResultCardProps) {
+  useEffect(() => {
+    // 카카오 SDK 로드
+    if (typeof window !== "undefined" && !(window as any).Kakao) {
+      const script = document.createElement("script");
+      script.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+      script.async = true;
+      script.onload = () => {
+        (window as any).Kakao.init("d876d8e1dd046ca7033d27e6bfe50e03"); // 카카오 JavaScript 키
+      };
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  const handleKakaoShare = () => {
+    const resultUrl = `${window.location.origin}?daily=${result.dailyBenefit}&days=${result.totalDays}&total=${result.totalAmount}`;
+    
+    if ((window as any).Kakao && (window as any).Kakao.Link) {
+      (window as any).Kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "시럽급여 (HoneyMoney) - 실업급여 계산 결과",
+          description: `1일 실업급여: ${formatCurrency(result.dailyBenefit)} | 지급일수: ${result.totalDays}일 | 총액: ${formatCurrency(result.totalAmount)}`,
+          imageUrl: `${window.location.origin}/icons/icon-192.png`,
+          link: {
+            mobileWebUrl: resultUrl,
+            webUrl: resultUrl,
+          },
+        },
+        buttons: [
+          {
+            title: "결과 확인하기",
+            link: {
+              mobileWebUrl: resultUrl,
+              webUrl: resultUrl,
+            },
+          },
+          {
+            title: "나도 계산해보기",
+            link: {
+              mobileWebUrl: window.location.origin,
+              webUrl: window.location.origin,
+            },
+          },
+        ],
+      });
+    }
+  };
+
+  const handleCopyLink = () => {
+    const resultUrl = `${window.location.origin}?daily=${result.dailyBenefit}&days=${result.totalDays}&total=${result.totalAmount}`;
+    navigator.clipboard.writeText(resultUrl);
+    alert("공유 링크가 복사되었습니다!");
+  };
+
   return (
     <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg shadow-lg p-8 space-y-6">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
@@ -74,13 +129,34 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
         </p>
       </div>
 
-      {/* 버튼 */}
-      <button
-        onClick={onReset}
-        className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-4 px-6 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
-      >
-        🔄 다시 계산하기
-      </button>
+      {/* 버튼 영역 */}
+      <div className="space-y-3">
+        <div className="grid grid-cols-3 gap-3">
+          {/* 카카오톡 공유 */}
+          <button
+            onClick={handleKakaoShare}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+          >
+            💬 카톡 공유
+          </button>
+
+          {/* URL 복사 공유 */}
+          <button
+            onClick={handleCopyLink}
+            className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+          >
+            🔗 링크 복사
+          </button>
+
+          {/* 다시 계산하기 */}
+          <button
+            onClick={onReset}
+            className="bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+          >
+            🔄 다시 계산
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

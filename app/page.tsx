@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { InputForm } from "@/components/InputForm";
 import { ResultCard } from "@/components/ResultCard";
 import { AdBanner, AdInContent, AdBottom } from "@/components/AdComponents";
@@ -8,6 +9,27 @@ import { calculateUnemploymentBenefit, UnemploymentBenefitInput, UnemploymentBen
 
 export default function Home() {
   const [result, setResult] = useState<UnemploymentBenefitResult | null>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    // URL 파라미터에서 결과 확인
+    const daily = searchParams.get("daily");
+    const days = searchParams.get("days");
+    const total = searchParams.get("total");
+
+    if (daily && days && total) {
+      // URL로 공유된 결과를 표시
+      const sharedResult: UnemploymentBenefitResult = {
+        dailyBenefit: parseInt(daily),
+        totalDays: parseInt(days),
+        totalAmount: parseInt(total),
+        averageWage: 0,
+        maxBenefit: 0,
+        minBenefit: 0,
+      };
+      setResult(sharedResult);
+    }
+  }, [searchParams]);
 
   const handleCalculate = (input: UnemploymentBenefitInput) => {
     const calculatedResult = calculateUnemploymentBenefit(input);
